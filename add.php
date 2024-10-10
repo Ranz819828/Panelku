@@ -1,24 +1,30 @@
 <?php
+$config = include 'config.php';
+$dataFile = 'data.json';
+$maxEmails = $config['max_emails']; // Get the maximum number of emails allowed from the configuration
 
-$read = file_get_contents('data.json');
-$json = json_decode($read,true);
+// Read existing emails from data.json
+$data = json_decode(file_get_contents($dataFile), true) ?? [];
 
-if($read == null || $read == '' || $read == 'null')
-{
-	$init = [];
-	$write = fopen("data.json","w") or die("Cannot write to path");
-			 fwrite($write,json_encode($init));
-			 fclose($write);
-	exit();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (count($data) < $maxEmails) {
+        $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+        $jumlahResult = isset($_POST['jumlahResult']) ? (int)$_POST['jumlahResult'] : 1;
+
+        if ($email) {
+            $data[] = ['email' => $email, 'jumlahResult' => $jumlahResult];
+
+            // Save the updated data to the JSON file
+            file_put_contents($dataFile, json_encode($data));
+
+            echo json_encode(['success' => true, 'message' => '👉Email Berhasil Di Tambahkan👈']);
+        } else {
+            echo json_encode(['success' => false, 'message' => '🤣Lu Dongo Isi Yang Bener Kocak!!.']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => '😂Lu Tolol Udah Max Minimal Sewa Yang Mahal Dek!!.']);
+    }
+} else {
+    echo json_encode(['success' => false, 'message' => 'Gagal menambahkan email.']);
 }
-
-$add = array(
-	'email' => $_GET['mail']
-	);
-
-array_unshift($json,$add);
-$put = fopen("data.json","w") or die("Cannot write to path");
-		 fwrite($put,json_encode($json));
-		 fclose($put);
-
-echo '200';
+?>

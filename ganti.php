@@ -1,15 +1,31 @@
 <?php
+header('Content-Type: application/json');
 
-$pertama = "<?php \n";
-$terakhir = "?>";
+// Ambil dan filter input dari query string
+$nik = isset($_GET['nick']) ? filter_var($_GET['nick'], FILTER_SANITIZE_STRING) : null;
+$sender = isset($_GET['sender']) ? filter_var($_GET['sender'], FILTER_SANITIZE_STRING) : null;
 
+if ($nik !== null && $sender !== null) {
+    $pertama = "<?php \n";
+    $terakhir = "?>";
+    $path = "ser.php"; // Mengubah path file
 
-$put = fopen("data.php","w") or die("Cannot write to path");
-		 fwrite($put,$pertama);
-		 fwrite($put,'$nik = "'.$_GET['nick'].'";');
-		 fwrite($put,"\n");
-		 fwrite($put,'$sender = "'.$_GET['sender'].'";');
-		 fwrite($put,"\n");
-		 fwrite($put,$terakhir);
-		 fclose($put);
-echo '200';
+    // Debugging: Menampilkan parameter yang diterima
+    error_log("nick: " . $nik);
+    error_log("sender: " . $sender);
+
+    // Buka file dalam mode write (tulis)
+    if ($put = fopen($path, "w")) {
+        fwrite($put, $pertama);
+        fwrite($put, "\n\$nik = \"$nik\";");
+        fwrite($put, "\n\$sender = \"$sender\";");
+        fwrite($put, "\n" . $terakhir);
+        fclose($put);
+        echo json_encode(['success' => true, 'message' => 'Nama Result Berhasil Diubah.']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Gagal membuka file untuk ditulis.']);
+    }
+} else {
+    echo json_encode(['success' => false, 'message' => 'Parameter tidak valid atau kosong.']);
+}
+?>

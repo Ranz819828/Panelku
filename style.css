@@ -1,60 +1,428 @@
-*
-{
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
+*, *::before, *::before {
+  box-sizing: border-box;
 }
+
+/* Resetting */
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+}
+
 body {
-width 100%: 
-min-height:100vh;
-margin:2rem;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, Roboto, 'Helvetica Neue', 'Trebuchet MS', sans-serif;
+  font-size: 1.36em;
+  line-height: 1.2em;
+  color: #000000;
+  position: absolute;
+  background:#000;   
+  background-position: center;
+  background-size: cover;
+  animation: gradient 200s ease infinite;
+  }
+  @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        }
 }
 
-/*
-####################################################
-M E D I A  Q U E R I E S
-####################################################
-*/
+/* Clearfix */
+.clearfix {}
 
-/*
-::::::::::::::::::::::::::::::::::::::::::::::::::::
-Bootstrap 4 breakpoints
-*/
-
-/* 
-Extra small devices (portrait phones, less than 544px) 
-No media query since this is the default in Bootstrap because it is "mobile first"
-*/
-
-
-/* Small devices (landscape phones, 544px and up) */
-@media (min-width: 544px) {  
-
+.clearfix::before, .clearfix::after {
+  content: '';
+  display: table;
 }
 
-/* Medium devices (tablets, 768px and up) 
-The navbar toggle appears at this breakpoint */
-@media (min-width: 768px) {  
-
+.clearfix::after {
+  clear: both;
 }
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) { 
-
+/* FIX greenbutton br's */
+br:not(.show) {
+  display: none;
 }
 
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {  
-    
+a, img {
+  border: 0;
+  outline: none;
 }
 
+a {
+  text-decoration: none;
+  color: #000000;
+}
 
+img {
+  vertical-align: top;
+}
 
-/*
-::::::::::::::::::::::::::::::::::::::::::::::::::::
-Custom media queries
-*/
+.wrap {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  min-width: 240px;
+  height: 100%;
+  min-height: 240px;
+  overflow: hidden;
+}
 
-@media (max-width: 950px) { 
+.f-buttons {
+  display: flex;
+  box-orient: horizontal;
+  box-pack: center;
+  box-direction: normal;
+  box-align: stretch;
+  justify-content: center;
+  flex-wrap: nowrap;
+  color: #1275ec;
+  font-weight: bold;
+  border-top: 1px solid #b4b4b4;
+}
 
+.f-buttons .btn {
+  box-orient: horizontal;
+  box-pack: center;
+  box-direction: normal;
+  box-align: stretch;
+  justify-content: center;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  user-select: none;
+  cursor: pointer;
+  font-size: 1.3em;
+  line-height: 0.95em;
+  padding: 0.85em 1em;
+  text-align: center;
+  flex: 1 auto;
+  margin: 0 1%;
+  align-items: center;
+  color: #1275ec;
+}
+
+.f-buttons .btn.exitpoint {
+  /* Exitpoint Button Styles */
+}
+
+.f-buttons .btn.cancel {
+  border-left: 1px solid #b4b4b4;
+}
+
+/* Some common styles */
+
+h1, h2, h3 {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+h1, p {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-weight: normal;
+  font-size: 100%;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+h1.bold {
+  font-size: 125%;
+  font-weight: bold;
+  margin-bottom: 9px;
+}
+
+.wrap {
+  min-width: 210px;
+  min-height: 210px;
+}
+
+.text_wrap, .background-text {
+  position: relative;
+}
+
+.background-text {
+  width: 100%;
+  height: 100%;
+  font-size: 1.2em;
+  z-index: 0;
+}
+
+.text_wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  width: 84.4%;
+  min-width: 240px;
+  max-width: 290px;
+  transform: translate(-50%,-50%);
+  z-index: 1;
+}
+
+/* ******************************************* */
+
+.window {
+  position: relative;
+  width: auto;
+  margin: auto;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.content {
+  margin: 7.6% 7% 8%;
+  padding: 0 8.1;
+}
+
+.content.text-on-top .header {
+  margin: 0;
+}
+
+.content.text-on-top .texts {
+  margin: 0 0 1.1em;
+}
+
+.content .header {
+  margin: 0 0 1.1em;
+}
+
+.content .header.use-icon {
+  white-space: nowrap;
+}
+
+.content .header.use-icon .logo, .content .header.use-icon h1, .content .header.use-icon .text {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+}
+
+.content .header.use-icon .logo {
+  width: 25%;
+}
+
+.content .header.use-icon h1, .content .header.use-icon .text {
+  margin-left: 4%;
+  max-width: 71%;
+  white-space: normal;
+}
+
+.content .texts .text {
+  display: block;
+  margin: 0 0 4%;
+}
+
+.blink {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% { 
+    opacity: 0.3;
+    color: red;
+  }
+}
+
+.background {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  margin: 0 auto;
+  background: #868667;
+}
+
+.background-images:not(.blur) {
+  max-width: max-content;
+  width: 100%;
+}
+
+.background-images.blur {
+  filter: blur(5px);
+}
+
+.background-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+  height: 100%;
+  min-width: 260px;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.background-images__item {
+  max-width: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.background-images__item::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.background-images__item img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* ******************************************* */
+
+@media screen and (orientation: portrait) and (max-width: 450px) {
+  h1 {
+    margin-bottom: 2px;
+  }
+
+  .content {
+    margin: 7.5% 6.7% 8%;
+  }
+}
+@media screen and (orientation: portrait) and (max-width: 400px) {
+  h1 {
+    margin-bottom: 3px;
+  }
+
+  .content {
+    margin: 7.4% 6.4% 8%;
+  }
+}
+@media screen and (orientation: portrait) and (max-width: 375px) {
+  h1 {
+    margin-bottom: 4px;
+  }
+
+  .content {
+    margin: 7.3% 6.1% 8%;
+  }
+}
+@media screen and (orientation: portrait) and (max-width: 350px) {
+  h1 {
+    margin-bottom: 5px;
+  }
+
+  .content {
+    margin: 7.2% 5.8% 8%;
+  }
+}
+@media screen and (orientation: portrait) and (max-width: 325px) {
+  h1 {
+    margin-bottom: 6px;
+  }
+
+  .content {
+    margin: 7% 5.6% 8%;
+  }
+}
+
+/* ************************************************************************* */
+
+@media screen and (orientation: landscape) {
+  .content {
+    margin-bottom: 0.5em;
+  }
+
+  .content.text-on-top .texts {
+    margin-bottom: 0.5em;
+  }
+
+  .content .header {
+    margin-bottom: 0.5em;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-height: 450px) {
+  h1 {
+    margin-bottom: 2px;
+  }
+
+  .content {
+    margin: 6.5% 7% 7%;
+  }
+}
+@media screen and (orientation: landscape) and (max-height: 400px) {
+  h1 {
+    margin-bottom: 3px;
+  }
+
+  .content {
+    margin: 5.5% 7% 6%;
+  }
+}
+@media screen and (orientation: landscape) and (max-height: 375px) {
+  h1 {
+    margin-bottom: 4px;
+  }
+
+  .content {
+    margin: 5% 7%;
+  }
+}
+@media screen and (orientation: landscape) and (max-height: 350px) {
+  h1 {
+    margin-bottom: 5px;
+  }
+
+  .content {
+    margin: 5% 7% 4%;
+  }
+}
+@media screen and (orientation: landscape) and (max-height: 325px) {
+  h1 {
+    margin-bottom: 6px;
+  }
+
+  .content {
+    margin: 5% 7% 3%;
+  }
+}
+@media screen and (orientation: landscape) and (max-height: 275px) {
+  .content .header.use-icon .logo {
+    display: none;
+  }
+
+  .content .header.use-icon h1 {
+    margin-left: 0;
+    max-width: 100%;
+  }
+}
+@media screen and (orientation: landscape) and (max-height: 250px) {
+  .content {
+    margin-bottom: 0.25em;
+  }
+
+  .content.text-on-top .texts, .content .header {
+    margin-bottom: 0;
+  }
 }
